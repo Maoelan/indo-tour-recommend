@@ -1,16 +1,19 @@
-# Laporan Proyek Machine Learning - Maulana Muhammad
+# Laporan Proyek Akhir Machine Learning - Maulana Muhammad
 
-## Lingkungan - CO2 Emission
+## Parawisata - Rekomendasi Destinasi Wisata Turis di Indonesia
 
-![image](https://user-images.githubusercontent.com/58927608/228171528-d61cf498-1ff7-4206-8caa-9d53f7f98fa5.png)
+![indonesia-travel-attraction-landmarks-tourism-traditional-culture-91162722](https://user-images.githubusercontent.com/58927608/229541740-616aef88-1faa-4d1c-8859-d34a30e9f412.jpg)
+[Sumber Gambar](https://www.dreamstime.com/stock-illustration-indonesia-travel-attraction-landmarks-tourism-traditional-culture-image91162722)
 
-CO2 *emissions* atau emisi karbon merupakan proses karbon dioksida ke atmosfer yang terjadi secara alami maupun dipicu aktivitas manusia, seperti deforestasi, konsumsi listrik, hingga kegiatan industri manufaktur. Senyawa ini adalah salah satu hasil dari pembakaran yang perlu dibuang. Gas buang berupa karbondioksida ini merupakan emisi yang kebanyakan saat ini dihasilkan kendaraan yang perlu diujikan dalam proses uji emisi. C02 *emission* ini sangat berpengaruh terhadap percepatan pemanasan global.
+Pariwisata di Indonesia merupakan sektor ekonomi penting di Indonesia. Pada tahun 2009, pariwisata menempati urutan ketiga dalam hal penerimaan devisa setelah komoditas minyak dan gas bumi serta minyak kelapa sawit. Berdasarkan data tahun 2016, jumlah wisatawan mancanegara yang datang ke Indonesia sebesar 11.525.963 juta lebih atau tumbuh sebesar 10,79% dibandingkan tahun sebelumnya.
   
-Pelepas senyawa karbon CO2 ke lapisan atmosfer bumi akan memberikan dampat pada lingkungan, kesehatan, dan ekonomi, yang cukup terlihat sekarang yaitu pada lingkungan seperti ada peningkatan suhu bumi pertahun yang berakibat salju dikutub dan cangkupan glesternya akan berkurang dan menyebabkan peningkatan permukaan air laut sehingga masalah ini harus diselesaikan untuk mencegah hal tersebut terjadi dalam jangka dekat.
+Berdasarkan data dari Badan Pusat Statistik, sebelas provinsi yang paling sering dikunjungi oleh para turis adalah Bali sekitar lebih dari 3,7 juta disusul, DKI Jakarta, Daerah Istimewa Yogyakarta, Jawa Timur, Jawa Barat, Sumatra Utara, Lampung, Sulawesi Selatan, Sumatra Selatan, Banten dan Sumatra Barat.
+
+Sekitar 59% turis berkunjung ke Indonesia untuk tujuan liburan, sementara 38% untuk tujuan bisnis. Singapura dan Malaysia adalah dua negara dengan catatan jumlah wisatawan terbanyak yang datang ke Indonesia dari wilayah ASEAN. Sementara dari kawasan Asia (tidak termasuk ASEAN) wisatawan Tiongkok berada di urutan pertama disusul Jepang, Korea Selatan, Taiwan dan India. Jumlah pendatang terbanyak dari kawasan Eropa berasal dari negara Britania Raya disusul oleh Belanda, Jerman dan Prancis.
 
 ## Business Understanding
 
-CO2 *Emission* atau emisi karbon merupakan proses pelepasan karbon ke atmosfer. Senyawa karbon merupakan hasil pembakaran yang perlu dibuang. Saat ini kebanyak penghasil emisi karbon merupakan kendaraan sehari-hari yang menghasilkan karbon dari pembakaran bahan bakar yang dilepaskan begitu saja ke atmosfer bumi. Bayangkan berapa banyak karbon yang dilepaskan dalam sehari oleh kendaraan. Kendaraan roda empat menghasilkan rata-rata 200 g/km karbon CO2. Itu dalam hitungan km, bagaimana dengan penggunaan kendaraan roda empat dalam sehari? ditambah seluruh penduduk bumi sekarang tidak terlepas dari kendaraan. Karena itu dibuatlah sistem untuk memprediksi penghasilan karbon CO2 untuk mengukur berapa banyak kendaraan roda empat mengeluarkan karbon dalam hitungan g/km.
+Pariwisata atau turisme adalah suatu perjalanan yang dilakukan untuk rekreasi atau liburan dan juga persiapan yang dilakukan untuk aktivitas ini. Sedangkan seorang wisatawan atau biasa disebut tirus merupakan seorang yang melakukan perjalanan setidaknya paling tidak sejauh 80 km dari tempat tinggalnya. Parawisata di Indonesia merupakan sektor penting karena sektor ini merupakan salah satu penyumpang devisa negara yang paling besar. Untuk para wisatawan atau turis melakukan wisata di Indonesia merupakan hal yang menyenagkan
 
 ### Problem Statements
 
@@ -312,12 +315,4 @@ Cara kerjanya adalah dengan melakukan pengurangan nilai data aktual dengan nilai
 
 REFERENSI :
   
-  [Irreversible climate change due to carbon dioxide emissions](https://www.pnas.org/doi/full/10.1073/pnas.0812721106) 
-
-  [Climate Change: Atmospheric Carbon Dioxide](https://www.climate.gov/news-features/understanding-climate/climate-change-atmospheric-carbon-dioxide) 
-
-  [CO2, the greenhouse effect and global warming: from the pioneering work of Arrhenius and Callendar to today’s Earth System Models](https://reader.elsevier.com/reader/sd/pii/S0160932716300308?token=926B8C03B6AF557DFA13E43DFAE380301F452C9AE0BD0ACA7B7345D65C02F0CE8AAC54E8BBC1904F448064BE28D0BBFD&originRegion=eu-west-1&originCreation=20230327151603) 
-  
-  [CO2 emission sources, greenhouse gases, and the global warming effect](https://www.researchgate.net/profile/Kelvin-Yoro/publication/343508726_CO2_emission_sources_greenhouse_gases_and_the_global_warming_effect/links/5f44aa2692851cd30227cffd/CO2-emission-sources-greenhouse-gases-and-the-global-warming-effect.pdf)
-  
-  [Evaluating the potential impact of global warming on the UAE residential buildings–A contribution to reduce the CO2 emissions](https://d1wqtxts1xzle7.cloudfront.net/83972358/j.buildenv.2009.04.00620220412-1-1hp1tf-libre.pdf?1649794475=&response-content-disposition=inline%3B+filename%3DEvaluating_the_potential_impact_of_globa.pdf&Expires=1679989093&Signature=UfA03vy6IFVY-RuXxGeBXztbCv9CfTcyNeI3RJB~FvJk-GMBgY31spiFZhCKS1TQGTSUaY0pi3S9YfcxxvPn8JKBJh2H6UCwGwRarfx7FXVww0ERWViCrHgn4ioRQ4Z-~Lx07x36mx6xiC0QZfb5hCdWbBDFmPcNVRN5p9hIqlIEGKfCqm-OLoFi1w80uSWdAe4wX1mpjrs7gEgxLzYqI~IpyA0-Q-M7i6VaEDsCiNi6R7JWVGHUl0ME~5rKo9uGuHN7C-c6-e0LxGHAAUK3bIWsVdL~cH9agZPgNgT7WA5DHjz~CyF~ivFIuOL4GKfQCy-aNe-RsLCuu0iCKbjMvA__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)
+  [Irreversible climate change due to carbon dioxide emissions](https://www.pnas.org/doi/full/10.1073/pnas.0812721106)

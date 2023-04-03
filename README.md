@@ -31,6 +31,8 @@ Menjelaskan tujuan dari pernyataan masalah:
     - Menggunakan *cosine similarity* untuk melakukan rekomendasi *content-based filtering* dengan mencari kemaripan antar data.
     - Membuat class RecommenderNet dengan keras Model Class untuk melakukan rekomendasi menggunakan *collaborative filtering* berdasarkan rating wisatawan atau turis. 
 
+## Content Based Filtering - Berdasarkan data wisatawan atau turis yang telah berkunjung ke tempat serupa sebelumnya 
+
 ## Data Understanding
 Dataset : [Indonesia Tourism Destination](https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination)
 
@@ -184,78 +186,21 @@ Teknik Data preparation yang dilakukan terdiri dari:
 
 ## Modeling
 Model machine learning yang digunakan untuk masalah ini terdiri dari 5 model yaitu:
-- LinearRegression : tidak memiliki parameter
-- DecisionTreeRegressor dengan parameter sebagai berikut:
-    * `max_depth = 10` : kedalaman pohon
-    * `random_state = 20` : digunakan untuk random generator
-- K-Nearest Neighbor dengan parameter sebagai berikut:
-    * `n_neighbors = 7` : jumlah tetangga yang digunakan untuk mengukur jarak
-- RandomForestRegressor dengan parameter sebagai berikut:
-    * `n_estimators = 50` : jumlah tree pada forest
-    * `max_depth = 15` : kedalaman pohon
-    * `random_state = 55` : digunakan untuk random generator
-    * `n_jobs = -1` : jumlah job yang digunakan secara pararel
-- Adaptive Boosting dengan parameter sebagai berikut:
-    * `learning_rate = 0.9` : bobot pada regressor pada masing-masing iterasi
-    * `random_state = 50` : digunakan untuk random generator
-    * `n_estimators = 10` : jumlah base estimator yang ingin digunakan dalam data
+
 
 **Kelebihan dan kekurangan algoritma yang digunakan**
-- LinearRegression:
-    * Kelebihan : Mengetahui hubungan antar variabel independen dan dependen.
-    * Kekurangan : Pada dunia nyata tidak banyak masalah yang menunjukkan hubungan yang jelas antar variabel independen dan dependen.
-- DecisionTreeRegressor:
-    * Kelebihan : Mudah dalam pembuatan dan dimasukkan dalam rangkaian pohon keputusan.
-    * Kekurangan : Tidak baik digunakan pada kasus-kasus kompleks karena akan membuat gambaran tree membingungkan.
-- K-Nearest Neighbor:
-    * Kelebihan : Mudah diterapkan pada proses regresi, dan model mudah beradaptasi.
-    * Kekurangan : Apabila dataset berukuran besar maka akan tidak berfungsi dengan baik.
-- RandomForestRegressor:
-    * Kelebihan : Dapat mengatasi noise dan missing value dan dapat mengatasi data dalam jumlah yang terbilang besar.
-    * Kekurangan : Interpretasi yang sulit dan membutuhkan hyperparameter tunning model yang tepat agar tepat untuk data.
-- RandomForestRegressor:
-    * Kelebihan : Dapat mengatasi noise dan missing value dan dapat mengatasi data dalam jumlah yang terbilang besar.
-    * Kekurangan : Interpretasi yang sulit dan membutuhkan hyperparameter tunning model yang tepat agar tepat untuk data.
-- Adaptive Boosting:
-    * Kelebihan : Hasil dari pemodelan dapat lebih akurat karena mengkombinasikan beberapa model.
-    * Kekurangan : Dapat mengurangi kemampuan interpretasi model karena meningkatnya kompleksitas model.
+
 
 **Mengapa menggunakan model tersebut?**
-- LinearRegression karena dapat melakukan generalisasi pada pola data, dan melakukan perhitungan pararel sehinggan proses training lebih cepat.
-- DecisionTreeRegressor karena mampu memproses pengambilan keputusan yang kompleks menjadi lebih simpel dan mudan diinterpretasikan.
-- K-Nearest Neighbor karena titik data akan diklasifikasikan berdasarkan kesamaan antar kelompok data yang berdekatan.
-- RandomForestRegressor karena terbuat dari beberapa decision tree yang digabungkan sehingga mendapatkan hasil prediksi yang lebih stabil.
-- Adaptive Boosting karena memilai prediksi model dan meningkatkan bobot sample dengan kesalahan yang dibuat pada model sebelumnya.
+
 
 ## Evaluation
-- Metrik evaluasi yang digunakan disini adalah Mean Squared Error. Mean Squared Error disini dapat dikatakan adalah sebuah metrik yang mengukur seberapa besar error pada nilai aktual dan nilai hasil prediksi.
-- Hasil yang diperoleh dari metrik ini apabila diurutkan dari error terkecil sampai terbesar adalah sebagai berikut:
-    
-    ![image](https://user-images.githubusercontent.com/58927608/228170034-f17c1ff9-5164-4751-80af-c1f6226b6a75.png)
-    
-    |                       |    train |     test |
-    |:---------------------:|---------:|---------:|
-    |       LinearRegressor | 0.013481 | 0.014259 |
-    | DecisionTreeRegressor | 0.004165 | 0.010623 |
-    |                   KNN | 0.007251 | 0.011366 |
-    |          RandomForest | 0.002074 | 0.009687 |
-    |              Boosting | 0.080138 | 0.078409 |
-  
-  Dapat disimpulkan dari hasil diatas RandomForestRegressor merupakan paling akurat memprediksi data dengan selisih   
-  error terkecil dibandingkan dengan model lainnya dan Adaptive Boosting memiliki error yang paling tinggi diantara 
-  kelima model yang digunakan
 
 **Formula Mean Squared Error dan cara Mean Squared Error bekerja** 
 
-formula Mean Squared Error :
-
-![image](https://user-images.githubusercontent.com/58927608/228169779-4e707c1d-ab14-4dcd-bc14-a9b99b152cc3.png)
-
-
 **Bagaimana cara Mean Squared Error bekerja?**
-
-Cara kerjanya adalah dengan melakukan pengurangan nilai data aktual dengan nilai prediksi dan hasilnya akan dikuadratkan dan dijumlahkan secara keseluruhan kemudian dibagi dengan banyak data yang ada.
 
 REFERENSI :
   
-  [Irreversible climate change due to carbon dioxide emissions](https://www.pnas.org/doi/full/10.1073/pnas.0812721106)
+  [Parawisata Indonesia](https://id.wikipedia.org/wiki/Pariwisata_di_Indonesia)
+  [Parawisata](https://id.wikipedia.org/wiki/Pariwisata)

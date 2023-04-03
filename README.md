@@ -185,20 +185,62 @@ Teknik Data preparation yang dilakukan terdiri dari:
 - Dibuatnya tourism_recommend untuk menampung fitur-fitur yang hanya akan digunakan untuk rekomendasi
 
 ## Modeling
-Model machine learning yang digunakan untuk masalah ini terdiri dari 5 model yaitu:
 
+**TF-IDF Vectorizer**
+- Sebelum mengembangkan sistem rekomendasi dengan content-based filtering, masukkan data preparation ke variabel baru yaitu cf.
+- Kemudian membuat sistem rekomendasi berdasarkan tempat wisata yang telah dikunjungi sebelummnya, menggunakan TF-IDF Vectorizer dengan fungsi `tfidfvectorizer()` dari sklearn. Tahap ini terdiri dari inisialisasi TfidfVectorizer, kemudian perhitungan idf pada place_name dan mapping array dari fitur index ke fitur nama.
+- Lakukan fitting dan transformasi fitur place_name dalam bentuk matriks.
+- Mengubah vektor tf-dif dalam bentuk matrix dengan `fungsi todense()`
+
+**Cosine Similarity**
+- Selanjutnya membuat dataframe untuk melihat tf-idf matrix dengan kolom berisi place_name dan baris place_category, ini digunakan untuk melihat korelasi antar place_name dengan category.
+- Kemudian menghitung derajat kesamaan (similarity degree) antar place_name menggunakan cosine_similarity dari sklearn.
+
+**Mendapatkan rekomendasi**
+- Membuat fungi tourism_recommendations dengan parameter sebagai berikut : 
+  - nama_tempat : nama tempat wisata
+  - similarity_data : dataframe similarity sebelumnya
+  - items : fitur untuk mendefinisikan kemiripan dari plaec_name dan place_category
+  - k : banyak rekomendasi yang diberikan
+- Kemudian menemukan rekomendasi yang mirip dengan Pantai Baron, berikut merupakan output yang dihasilkan :
+ 
+  |   |       place_name | place_category |
+  |--:|-----------------:|---------------:|
+  | 0 |     Pantai Ancol |         Bahari |
+  | 1 |    Pantai Marina |         Bahari |
+  | 2 |    Pantai Congot |         Bahari |
+  | 3 |     Pantai Drini |         Bahari |
+  | 4 | Pantai Ngrenehan |         Bahari |
 
 **Kelebihan dan kekurangan algoritma yang digunakan**
-
+Kelebihan *content-based filtering*
+- Kemapuan untuk merekomendasikan item yang bersifat personal dan baru bagi user
+Kekurangan *content-based filtering*
+- Terbatas pada rekomendasi pad item-item yang mirip sehingga tidak ada kesempatan untuk mendapatkan item yang diluar kemiripan
 
 **Mengapa menggunakan model tersebut?**
-
+- Karena sistem rekomendasi ini menampilkan rekomendasi berdasarkan tempat wisata yang telah dikunjungi pada wisatawan atau turis sebelumnya, sehingga menampilkan rekomendasi yang mirip pada wisata sebelumnya.
 
 ## Evaluation
+- Metrik evaluasi yang digunakan adalah recommender system precision. Disini precision merupakan jumlah item yang direkomendasikan yang relevan.
+**Formula Mean Squared Error dan cara Mean Squared Error bekerja**
+Rumus yang digunakan untuk recommender system precision sebagai berikut :
 
-**Formula Mean Squared Error dan cara Mean Squared Error bekerja** 
+![image](https://user-images.githubusercontent.com/58927608/229649814-1d36551c-687b-4118-b4df-a6f100433bb3.png)
 
 **Bagaimana cara Mean Squared Error bekerja?**
+Cara kerjanya adalah dengan membagi nilai item yang relevan dengan nilai jumlah item yang direkomendasikan, misalnya berikut
+
+  |   |       place_name | place_category |
+  |--:|-----------------:|---------------:|
+  | 0 |     Pantai Ancol |         Bahari |
+  | 1 |    Pantai Marina |         Bahari |
+  | 2 |    Pantai Congot |         Bahari |
+  | 3 |     Pantai Drini |         Bahari |
+  | 4 | Pantai Ngrenehan |         Bahari |
+
+Fitur yang relevan pada tabel diatas adalah 5 dengan jumlah total top-N adalah 5, apabila dimasukkan kedalam rumus maka akan menjadi seperti berikut :
+ releven/jumlah item rekomendasi = 5/5 = 1 berarti precisionnya adalah 100%
 
 REFERENSI :
   

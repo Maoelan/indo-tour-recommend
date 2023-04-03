@@ -131,8 +131,8 @@ Dataset : [Indonesia Tourism Destination](https://www.kaggle.com/datasets/aprabo
    |  max  |   300.000000 |   437.000000 |      5.000000 |
 
    Terlihat pada tabel distribusi, dapat dipastikan tidak terdapat bahwa terdapat data duplikat pada fitur User_Id, data duplikat ini akan diproses pada proses data preparation.
-- Kemudian menggabungkan fitur Category dan Place_Name pada tourism ke dalam dataframe rating.
-- Kemudian cek data null pada dataframe all_tourism yang berisi fitur-fitur yang telah digabung sebelumnya.
+- Kemudian menggabungkan fitur Category dan Place_Name pada tourism ke dalam variabel rating.
+- Kemudian cek data null pada variabel all_tourism yang berisi fitur-fitur yang telah digabung sebelumnya.
 
 **Univariate Exploratory Data Analysis**
 - Melakukan teknik EDA menggunakan univariate analysis dengan memvisualisasikan data untuk memahami satu persatu data pada fitur yang telah diolah sebelumnya.
@@ -164,64 +164,23 @@ Dataset : [Indonesia Tourism Destination](https://www.kaggle.com/datasets/aprabo
   
 ## Data Preparation
 Teknik Data preparation yang dilakukan terdiri dari:
- - Label encoding
- - OneHot encoding
- - Reduksi dimensi dengan PCA
- - Train-test-split data
+ - Menghapus data duplikat pada Place_Id yang sudah ditunjukkan pada bagian Data Preprocessing
+ - Membuat dictionary untuk data baru yang berisi fitur place_id, place_category dan place_name
 
 **Proses Data Preparation**
-
-**Encoding Fitur Kategori**
-- Mengubah fitur categorical menjadi data numerik, pertama adalah fitur Transmission kalan diubah menggunakan LabelEncoder.
-- Fitur Fuel Type diubah menggunakan OneHotEncoder.
-
-**Reduksi Dimensi dengan PCA**
-- Mengecek korelasi antara ketiga fitur yaitu Fuel Consumption City (L/100 km), Fuel Consumption Hwy (L/100 km), Fuel Consumption Comb (L/100 km) untuk menentukan apakah fitur ini dapat dilakukan reduksi dimensi dengan PCA.
-
-  ![image](https://user-images.githubusercontent.com/58927608/228165397-a4e47ab5-6a10-4592-938f-841adbd91825.png)
-  
-  Pada pairplot diatas terlihat kalau ketiga feature yaitu Fuel Consumption City (L/100 km), Fuel Consumption Hwy (L/100 km) dan Fuel Consumption Comb (L/100 km) memiliki korelasi yang cukup tinggi sehingga dapat dilakukan proses reduksi dimensi
-
-- Setelah diketahui ketiga fitur tersebut berkorelasi dilakukan reduksi dimensi dengan PCA, membuat fitur baru yaitu Fuel Consumption untuk menggantikan ketiga fitur tersebut.
-
-**Train-test-split**
-- Sebelum dilakukan train-test-split, langkah awal adalah memisahkan antara feature dan label, variabel x digunakan untuk menampung feature yang tediri dari:
-  - Engine Size(L)
-  - Cylinders
-  - Transmission
-  - Fuel Consumption Comb (mpg)
-  - Fuel_Type_D
-  - Fuel_Type_E
-  - Fuel_Type_N
-  - Fuel_Type_X
-  - Fuel_Type_Z
-  - Fuel Consumption
-- Dan variabel x digunakan untuk menampung label yaitu
-  - CO2 Emissions(g/km)
-- Kemudian melakukan train-test-split, data train dan test dibagi menjadi rasio 80:20.
-  Setelah dilakukan splitting data, dari total 6826 data setelah dilakukan splitting data, data terbagi menjadi 5460 train dan 1366 test.
-  
-**Standarisasi**
-- Melakukan standarisasi dengan MinMaxScaler.
-
-  |       | Engine Size(L) | Cylinders | Transmission | Fuel Consumption Comb (mpg) |
-  |:-----:|:--------------:|:---------:|:------------:|:---------------------------:|
-  | count |    5460.0000   | 5460.0000 |   5460.0000  |          5460.0000          |
-  |  mean |     0.3990     |   0.4785  |    0.5498    |            0.3786           |
-  |  std  |     0.2274     |   0.3016  |    0.2776    |            0.1943           |
-  |  min  |     0.0000     |   0.0000  |    0.0000    |            0.0000           |
-  |  25%  |     0.2075     |   0.2000  |    0.3077    |            0.2258           |
-  |  50%  |     0.3962     |   0.6000  |    0.5769    |            0.3548           |
-  |  75%  |     0.5094     |   0.6000  |    0.6923    |            0.5161           |
-  |  max  |     1.0000     |   1.0000  |    1.0000    |            1.0000           |
-
-- Dari tabel diatas terlihat bahwa min dari data yaitu 0 dan max dari data yaitu 1, karena standarisasi MinMaxScaler menghasilkan distribusi data yang ada pada rentang 0 dan 1.
+- Cek apakah ada data null pada data all_tourism
+- Kemudian cek banyak data pada all_tourism, diperoleh informasi bahwa banyak data sekarang adalah 437
+- Setelah itu buat variabel baru preparation yang berisi data dari all_tourism
+- Kemudian hapus nilai duplikat pada fitur Place_Id
+- Membuat variabel baru untuk membuat dictianory, seperti berikut :
+  - `place_id = preparation['Place_Id'].tolist()`
+  - `place_category = preparation['Category'].tolist()`
+  - `place_name = preparation['Place_Name'].tolist()`
+- Kemudian menggabungkan variabel baru tersebut ke dalam tourism_recommend 
 
 **Mengapa perlu dilakukan data prepration?** 
-- Perlu dilakukan proses encoding pada data categorical adalah agar data dapat diproses oleh model, karena model lebih dapat memproses data bertipe numerik.
-- Diperlukannya reduksi dimensi adalah agar menyederhanakan model dan mencegah terjadinya overfitting.
-- Perlu dilakukan train-test-split agar hasil prediksi dapat lebih akurat pada data baru.
-- Perlu dilakukan standarisasi agar model lebih mudah memproses data.
+- Untuk menghilangkan data duplikat, karena dapat menyebabkan bias pada data
+- Dibuatnya tourism_recommend untuk menampung fitur-fitur yang hanya akan digunakan untuk rekomendasi
 
 ## Modeling
 Model machine learning yang digunakan untuk masalah ini terdiri dari 5 model yaitu:

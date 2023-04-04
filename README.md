@@ -31,8 +31,6 @@ Menjelaskan tujuan dari pernyataan masalah:
     - Menggunakan *cosine similarity* untuk melakukan rekomendasi *content-based filtering* dengan mencari kemaripan antar data.
     - Membuat class RecommenderNet dengan keras Model Class untuk melakukan rekomendasi menggunakan *collaborative filtering* berdasarkan rating wisatawan atau turis. 
 
-## Content Based Filtering - Berdasarkan data wisatawan atau turis yang telah berkunjung ke tempat serupa sebelumnya 
-
 ## Data Understanding
 Dataset : [Indonesia Tourism Destination](https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination)
 
@@ -186,8 +184,10 @@ Teknik Data preparation yang dilakukan terdiri dari:
 
 ## Modeling
 
+## Model Content Based Filtering - Berdasarkan data wisatawan atau turis yang telah berkunjung ke tempat serupa sebelumnya 
+
 **TF-IDF Vectorizer**
-- Sebelum mengembangkan sistem rekomendasi dengan content-based filtering, masukkan data preparation ke variabel baru yaitu cf.
+- Sebelum mengembangkan sistem rekomendasi dengan content-based filtering, masukkan data preparation ke variabel baru yaitu data.
 - Kemudian membuat sistem rekomendasi berdasarkan tempat wisata yang telah dikunjungi sebelummnya, menggunakan TF-IDF Vectorizer dengan fungsi `tfidfvectorizer()` dari sklearn. Tahap ini terdiri dari inisialisasi TfidfVectorizer, kemudian perhitungan idf pada place_name dan mapping array dari fitur index ke fitur nama.
 - Lakukan fitting dan transformasi fitur place_name dalam bentuk matriks.
 - Mengubah vektor tf-dif dalam bentuk matrix dengan `fungsi todense()`
@@ -196,7 +196,7 @@ Teknik Data preparation yang dilakukan terdiri dari:
 - Selanjutnya membuat dataframe untuk melihat tf-idf matrix dengan kolom berisi place_name dan baris place_category, ini digunakan untuk melihat korelasi antar place_name dengan category.
 - Kemudian menghitung derajat kesamaan (similarity degree) antar place_name menggunakan cosine_similarity dari sklearn.
 
-**Mendapatkan rekomendasi**
+**Mendapatkan Rekomendasi Destinasi Wisata**
 - Membuat fungi tourism_recommendations dengan parameter sebagai berikut : 
   - nama_tempat : nama tempat wisata
   - similarity_data : dataframe similarity sebelumnya
@@ -212,16 +212,58 @@ Teknik Data preparation yang dilakukan terdiri dari:
   | 3 |     Pantai Drini |         Bahari |
   | 4 | Pantai Ngrenehan |         Bahari |
 
-**Kelebihan dan kekurangan algoritma yang digunakan**
-Kelebihan *content-based filtering*
-- Kemapuan untuk merekomendasikan item yang bersifat personal dan baru bagi user
-Kekurangan *content-based filtering*
-- Terbatas pada rekomendasi pad item-item yang mirip sehingga tidak ada kesempatan untuk mendapatkan item yang diluar kemiripan
+**Kelebihan dan kekurangan *content-based filtering***
 
-**Mengapa menggunakan model tersebut?**
+- Kelebihan *content-based filtering*
+  - Kemapuan untuk merekomendasikan item yang bersifat personal dan baru bagi user
+
+- Kekurangan *content-based filtering*
+  - Terbatas pada rekomendasi pad item-item yang mirip sehingga tidak ada kesempatan untuk mendapatkan item yang diluar kemiripan
+
+**Mengapa menggunakan *content-based filtering?***
 - Karena sistem rekomendasi ini menampilkan rekomendasi berdasarkan tempat wisata yang telah dikunjungi pada wisatawan atau turis sebelumnya, sehingga menampilkan rekomendasi yang mirip pada wisata sebelumnya.
 
+## Model Collaboratieve Filtering - Berdasarkan data rating wisatawan atau turis untuk merekomendasikan tempat bagi user untuk tempat yang tidak pernah dikunjungi 
+
+**Data Understanding**
+- Menggunakan data preparation pada data preparation sebelumnya, buatlah variabel baru bernama cf dengan memasukkan data preparation.
+
+**Data Understanding**
+- Kemudian encoder User_Id dan Place_Id menjadi indeks integer.
+- Kemudian mapping User_Id dan Place_Id kedalam proses encoder sebelumnya.
+- Kemudian cek jumlah user dan place, lalu ubah nilai Place_Ratings menjadi float
+
+**Splitting Training & Validation Data**
+- Lakukan distribusi data dengan random_state agar data menjadi acak.
+- Lakukan mapping data User_Id dan Place_Id menjadi skala 0 sampai 1
+- Kemudian split data train dan validation menjadi 80:20
+
+**Training**
+- Pada proses ini menghitung skor kecocokan wisatawan atau turis dengan destinasi wisata dengan teknik embedding.
+- Membuat class RecommenderNet dengan keras Model class.
+- Menginisialisasikan fungsi embedding.
+- Membuat layer embedding user dan layer embedding user dengan bias.
+- Membuat layer embedding place dan layer embedding place dengan bias.
+- Membuat fungsi call yang memanggil layer embedding 1,2,3, dan 4.
+- Kemudian menggunakan activation sigmoid.
+- Lakukan compile pada model yang telah dibuat dengan loss `BinaryCrossentropy()`, optimizer `Adam()` dengan `learning_rate = 0.001`, dan metrics `RootMeanSquaredError()`.
+- Lakukan proses training dengan `batch_size = 8` dan `epochs = 100`.
+
+**Mendapatkan Rekomendasi Destinasi Wisata**
+- Agar mendapatkan rekomendasi destinasi wisata, sebaiknya acak sample yang didefinisikan pada places_not_visited menggunakan operator bitwise (~) yang diperoleh pada variabel places_visited_by_user.
+- Kemudian untuk memperoleh rekomendasi destinasi wisata, gunakan model.predict(), berikut merupakan output rekomendasi yang dihasilkan :
+
+  ![image](https://user-images.githubusercontent.com/58927608/229660904-0e790b34-fdf2-4c37-9395-a0d420401dab.png) 
+
+**Kelebihan dan kekurangan algoritma yang digunakan**
+
+**Mengapa menggunakan model tersebut?**
+
+
 ## Evaluation
+
+## Evaluasi Content Based Filtering
+
 - Metrik evaluasi yang digunakan adalah recommender system precision. Disini precision merupakan jumlah item yang direkomendasikan yang relevan.
 **Formula Mean Squared Error dan cara Mean Squared Error bekerja**
 Rumus yang digunakan untuk recommender system precision sebagai berikut :
@@ -241,6 +283,9 @@ Cara kerjanya adalah dengan membagi nilai item yang relevan dengan nilai jumlah 
 
 Fitur yang relevan pada tabel diatas adalah 5 dengan jumlah total top-N adalah 5, apabila dimasukkan kedalam rumus maka akan menjadi seperti berikut :
  releven/jumlah item rekomendasi = 5/5 = 1 berarti precisionnya adalah 100%
+ 
+## Evaluasi Collaboratieve Filtering
+
 
 REFERENSI :
   

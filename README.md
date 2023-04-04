@@ -255,10 +255,16 @@ Teknik Data preparation yang dilakukan terdiri dari:
 
   ![image](https://user-images.githubusercontent.com/58927608/229660904-0e790b34-fdf2-4c37-9395-a0d420401dab.png) 
 
-**Kelebihan dan kekurangan algoritma yang digunakan**
+**Kelebihan dan kekurangan *Collaborative Filtering***
+
+- Kelebihan *Collaborative Filtering*
+  - Rekomendasi akan tetap bekerja dalam keadaan dimana konten sulit dianalisa.
+
+- Kekurangan *Collaborative Filtering*
+  -  Membutuhkan parameter rating, sehingga jika ada item baru dalam sistem maka tidak akan direkomendasikan.
 
 **Mengapa menggunakan model tersebut?**
-
+- Karena sistem rekomendasi ini menampilkan rekomendasi berdasarkan rating, dimana tujuan dari collaborative filtering adalah untuk merekomendasikan destinasi wisata walaupun wisatawan atau turis tidak pernah pergi kesuatu tempat destinasi wisata sebelumnya.
 
 ## Evaluation
 
@@ -284,8 +290,22 @@ Cara kerjanya adalah dengan membagi nilai item yang relevan dengan nilai jumlah 
 Fitur yang relevan pada tabel diatas adalah 5 dengan jumlah total top-N adalah 5, apabila dimasukkan kedalam rumus maka akan menjadi seperti berikut :
  releven/jumlah item rekomendasi = 5/5 = 1 berarti precisionnya adalah 100%
  
-## Evaluasi Collaboratieve Filtering
+## Evaluasi Collaborative Filtering
 
+- Metrik evaluasi yang digunakan adalah Root Mean Squared Error (RMSE) yang mengukur tingkat akurasi hasil dari perkiraan model yang telah dibuat.
+- Hasil yang diperoleh dari metrik ini sebagai berikut :
+ 
+  ![image](https://user-images.githubusercontent.com/58927608/229662725-3a01b438-5753-4894-bed6-d2911ab13871.png)
+  
+  Dapat disumpulkan pada proses training nilai error akhir untuk training berada pada angka 0.29 dan error pada test pada angka 0.31. Sehingga nilai tersebut sudah cukup bagus untuk sistem rekomendasi `collaborative filtering`.
+
+**Formula Mean Squared Error dan cara Mean Squared Error bekerja**
+Rumus yang digunakan untuk RMSE sebagai berikut :
+
+![image](https://user-images.githubusercontent.com/58927608/229663230-ae205eec-1cfa-4042-9e66-47714a4deb05.png)
+
+**Bagaimana cara Mean Squared Error bekerja?**
+Cara kerja RMSE adalah dengan mengkuadratkan error (prediksi '' observasi) kemudian dibagi dengan jumlah data (= rata-rata), kemudian hasil tersebut diakarkan.
 
 REFERENSI :
   

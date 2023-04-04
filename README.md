@@ -300,11 +300,13 @@ Fitur yang relevan pada tabel diatas adalah 5 dengan jumlah total top-N adalah 5
   Dapat disumpulkan pada proses training nilai error akhir untuk training berada pada angka 0.29 dan error pada test pada angka 0.31. Sehingga nilai tersebut sudah cukup bagus untuk sistem rekomendasi `collaborative filtering`.
 
 **Formula Mean Squared Error dan cara Mean Squared Error bekerja**
+
 Rumus yang digunakan untuk RMSE sebagai berikut :
 
 ![image](https://user-images.githubusercontent.com/58927608/229663230-ae205eec-1cfa-4042-9e66-47714a4deb05.png)
 
 **Bagaimana cara Mean Squared Error bekerja?**
+
 Cara kerja RMSE adalah dengan mengkuadratkan error (prediksi '' observasi) kemudian dibagi dengan jumlah data (= rata-rata), kemudian hasil tersebut diakarkan.
 
 REFERENSI :

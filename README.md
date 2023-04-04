@@ -5,11 +5,7 @@
 ![indonesia-travel-attraction-landmarks-tourism-traditional-culture-91162722](https://user-images.githubusercontent.com/58927608/229541740-616aef88-1faa-4d1c-8859-d34a30e9f412.jpg)
 [Sumber Gambar](https://www.dreamstime.com/stock-illustration-indonesia-travel-attraction-landmarks-tourism-traditional-culture-image91162722)
 
-Pariwisata di Indonesia merupakan sektor ekonomi penting di Indonesia. Pada tahun 2009, pariwisata menempati urutan ketiga dalam hal penerimaan devisa setelah komoditas minyak dan gas bumi serta minyak kelapa sawit. Berdasarkan data tahun 2016, jumlah wisatawan mancanegara yang datang ke Indonesia sebesar 11.525.963 juta lebih atau tumbuh sebesar 10,79% dibandingkan tahun sebelumnya.
-  
-Berdasarkan data dari Badan Pusat Statistik, sebelas provinsi yang paling sering dikunjungi oleh para turis adalah Bali sekitar lebih dari 3,7 juta disusul, DKI Jakarta, Daerah Istimewa Yogyakarta, Jawa Timur, Jawa Barat, Sumatra Utara, Lampung, Sulawesi Selatan, Sumatra Selatan, Banten dan Sumatra Barat.
-
-Sekitar 59% turis berkunjung ke Indonesia untuk tujuan liburan, sementara 38% untuk tujuan bisnis. Singapura dan Malaysia adalah dua negara dengan catatan jumlah wisatawan terbanyak yang datang ke Indonesia dari wilayah ASEAN. Sementara dari kawasan Asia (tidak termasuk ASEAN) wisatawan Tiongkok berada di urutan pertama disusul Jepang, Korea Selatan, Taiwan dan India. Jumlah pendatang terbanyak dari kawasan Eropa berasal dari negara Britania Raya disusul oleh Belanda, Jerman dan Prancis.
+Pariwisata merupakan salah satu sektor yang menghasilkan devisa negara terbanyak dan sektor ini berperan penting dalam meningkatkan perekonomian suatu negara. Sektor pariwisata merupakan salah satu sektor strategis yang harus dimanfaatkan untuk pembangunan kepariwisataan sebagai mana bagian dari pembangunan Nasional. Pengaruh pariwisata terhadap ekonomi dengan menganalisis jumlah turis dan devisa pariwisata di Indonesia pada tahun 2014 menunjukan pertumbuhan pariwisata (devisa pariwisata dan jumlah turis) dan nilai tukar rupiah memiliki peningkatan kurs. Perkembangan pariwisata di Indonesia diikuti dengan jumlah turis kunjungan turis yang meningkat. Pada tahun 2013 terjadi peningkatan sektor pariwisata yang sebelumnya dari 10%  menjadi 17% dari total ekspor barang dan jasa dengan penghasilan 10 Miliyar USD. Data pada tahun 2022 Badan Pusat Statistik (BPS) mencatat turis yang datang ke Indonesia naik menjadi 364%, hal ini jelas merupakan kenaikan yang sangat tinggi, dan dapat dipastikan tiap tahunnya akan ada peningkatan kenaikan kunjungan turis ke Indonesia.
 
 ## Business Understanding
 
@@ -87,6 +83,12 @@ Dataset : [Indonesia Tourism Destination](https://www.kaggle.com/datasets/aprabo
     *   User_Id : Id dari user
     *   Location : Lokasi user
     *   Age : Umur user
+
+**Data Understanding Collaborative Filtering**
+- Menggunakan data preparation pada data preparation, buat variabel baru bernama cf dengan memasukkan data preparation.
+- Kemudian encoder User_Id dan Place_Id menjadi indeks integer.
+- Kemudian mapping User_Id dan Place_Id kedalam proses encoder sebelumnya.
+- Kemudian cek jumlah user dan place, lalu ubah nilai Place_Ratings menjadi float
     
 ### Data Preprocessing
 
@@ -178,6 +180,11 @@ Teknik Data preparation yang dilakukan terdiri dari:
   - `place_name = preparation['Place_Name'].tolist()`
 - Kemudian menggabungkan variabel baru tersebut ke dalam tourism_recommend 
 
+**Splitting Training & Validation Data untuk Collaborative Filtering**
+- Lakukan distribusi data dengan random_state agar data menjadi acak.
+- Lakukan mapping data User_Id dan Place_Id menjadi skala 0 sampai 1
+- Kemudian split data train dan validation menjadi 80:20
+
 **Mengapa perlu dilakukan data prepration?** 
 - Untuk menghilangkan data duplikat, karena dapat menyebabkan bias pada data
 - Dibuatnya tourism_recommend untuk menampung fitur-fitur yang hanya akan digunakan untuk rekomendasi
@@ -225,25 +232,20 @@ Teknik Data preparation yang dilakukan terdiri dari:
 
 ## Model Collaboratieve Filtering - Berdasarkan data rating wisatawan atau turis untuk merekomendasikan tempat bagi user untuk tempat yang tidak pernah dikunjungi 
 
-**Data Understanding**
-- Menggunakan data preparation pada data preparation sebelumnya, buatlah variabel baru bernama cf dengan memasukkan data preparation.
-
-**Data Understanding**
-- Kemudian encoder User_Id dan Place_Id menjadi indeks integer.
-- Kemudian mapping User_Id dan Place_Id kedalam proses encoder sebelumnya.
-- Kemudian cek jumlah user dan place, lalu ubah nilai Place_Ratings menjadi float
-
-**Splitting Training & Validation Data**
-- Lakukan distribusi data dengan random_state agar data menjadi acak.
-- Lakukan mapping data User_Id dan Place_Id menjadi skala 0 sampai 1
-- Kemudian split data train dan validation menjadi 80:20
-
 **Training**
 - Pada proses ini menghitung skor kecocokan wisatawan atau turis dengan destinasi wisata dengan teknik embedding.
 - Membuat class RecommenderNet dengan keras Model class.
 - Menginisialisasikan fungsi embedding.
-- Membuat layer embedding user dan layer embedding user dengan bias.
-- Membuat layer embedding place dan layer embedding place dengan bias.
+- Membuat layer embedding user dan layer embedding user dengan bias, yang terdiri dari parameter sebagai berikut :
+  - `num_users` : merupakan hasil encoder User_Id dalam indeks integer.
+  - `embedding_size` : merupakan besaran dimensi vector yang digunakan untuk embedding
+  - `embedding_initializer = 'he_normal'` : Inisialisasi untuk matrik embedding, disini menggunakan 'he_normal'
+  - `embedding_regularizer = keras.regularizers.12(1e06)` : Fungsi regularizer yang diterapkan pada matrik embedding, disini menggunakan keras.regularizers.12(1e06)
+- Membuat layer embedding place dan layer embedding place dengan bias, yang terdiri dari parameter sebagai berikut :
+  - `num_places` : merupakan hasil encoder Places_Id dalam indeks integer.
+  - `embedding_size` : merupakan besaran dimensi vector yang digunakan untuk embedding
+  - `embedding_initializer = 'he_normal'` : Inisialisasi untuk matrik embedding, disini menggunakan 'he_normal'
+  - `embedding_regularizer = keras.regularizers.12(1e06)` : Fungsi regularizer yang diterapkan pada matrik embedding, disini menggunakan keras.regularizers.12(1e06)
 - Membuat fungsi call yang memanggil layer embedding 1,2,3, dan 4.
 - Kemudian menggunakan activation sigmoid.
 - Lakukan compile pada model yang telah dibuat dengan loss `BinaryCrossentropy()`, optimizer `Adam()` dengan `learning_rate = 0.001`, dan metrics `RootMeanSquaredError()`.
@@ -253,7 +255,32 @@ Teknik Data preparation yang dilakukan terdiri dari:
 - Agar mendapatkan rekomendasi destinasi wisata, sebaiknya acak sample yang didefinisikan pada places_not_visited menggunakan operator bitwise (~) yang diperoleh pada variabel places_visited_by_user.
 - Kemudian untuk memperoleh rekomendasi destinasi wisata, gunakan model.predict(), berikut merupakan output rekomendasi yang dihasilkan :
 
-  ![image](https://user-images.githubusercontent.com/58927608/229660904-0e790b34-fdf2-4c37-9395-a0d420401dab.png) 
+  Showing recommendations for users : 41
+  
+  **Place with high ratings from user**
+  
+  |                 Place_Name |      Category |
+  |---------------------------:|--------------:|
+  |     Flower Farm Setiya Aji |    Cagar Alam |
+  |         Candi Gedong Songo |        Budaya |
+  |                   Goa Rong |    Cagar Alam |
+  | Pemandian Air Panas Ciater |    Cagar Alam |
+  |                Taman Mundu | Taman Hiburan |
+  
+  **Top 10 place recommendation**
+  
+  |                          Place_Name |           Category |
+  |------------------------------------:|-------------------:|
+  |                  Kebun Teh Nglinggo |         Cagar Alam |
+  |                   Desa Wisata Kelor |      Taman Hiburan |
+  |           Seribu Batu Songgo Langit |         Cagar Alam |
+  | Desa Wisata Rumah Domes/Teletubbies |      Taman Hiburan |
+  |                 Wisata Kraton Jogja |             Budaya |
+  |      Grojogan Watu Purbo Bangunrejo |      Taman Hiburan |
+  |         Kawasan Wisata Sosrowijayan | Pusat Perbelanjaan |
+  |                        Pantai Baron |             Bahari |
+  |                     Pantai Ngobaran |             Bahari |
+  |                       Bendung Lepen |      Taman Hiburan |
 
 **Kelebihan dan kekurangan *Collaborative Filtering***
 
@@ -274,9 +301,10 @@ Teknik Data preparation yang dilakukan terdiri dari:
 **Formula Mean Squared Error dan cara Mean Squared Error bekerja**
 Rumus yang digunakan untuk recommender system precision sebagai berikut :
 
-![image](https://user-images.githubusercontent.com/58927608/229649814-1d36551c-687b-4118-b4df-a6f100433bb3.png)
+  ![image](https://user-images.githubusercontent.com/58927608/229649814-1d36551c-687b-4118-b4df-a6f100433bb3.png)
 
 **Bagaimana cara Mean Squared Error bekerja?**
+
 Cara kerjanya adalah dengan membagi nilai item yang relevan dengan nilai jumlah item yang direkomendasikan, misalnya berikut
 
   |   |       place_name | place_category |
@@ -294,8 +322,8 @@ Fitur yang relevan pada tabel diatas adalah 5 dengan jumlah total top-N adalah 5
 
 - Metrik evaluasi yang digunakan adalah Root Mean Squared Error (RMSE) yang mengukur tingkat akurasi hasil dari perkiraan model yang telah dibuat.
 - Hasil yang diperoleh dari metrik ini sebagai berikut :
- 
-  ![image](https://user-images.githubusercontent.com/58927608/229662725-3a01b438-5753-4894-bed6-d2911ab13871.png)
+  
+  ![image](https://user-images.githubusercontent.com/58927608/229677006-17ee8370-50ec-460c-98e6-ef8a7a0abde7.png)
   
   Dapat disumpulkan pada proses training nilai error akhir untuk training berada pada angka 0.29 dan error pada test pada angka 0.31. Sehingga nilai tersebut sudah cukup bagus untuk sistem rekomendasi `collaborative filtering`.
 
@@ -311,6 +339,11 @@ Cara kerja RMSE adalah dengan mengkuadratkan error (prediksi '' observasi) kemud
 
 REFERENSI :
   
-  [Parawisata Indonesia](https://id.wikipedia.org/wiki/Pariwisata_di_Indonesia)
+  [PENGARUH SEKTOR PARAWISATA TEHADAP PERTUMBUHAN EKONOMI DI INDONESIA](https://repository.unair.ac.id/86231/1/TE.%2005-19%20Yak%20p%20ABSTRAK.pdf)
   
-  [Parawisata](https://id.wikipedia.org/wiki/Pariwisata)
+  [KONTRIBUSI PARIWISATA TERHADAP PENINGKATAN KESEJAHTERAAN
+MASYARAKAT INDONESIA](http://jurnal.unpad.ac.id/prosiding/article/viewFile/13622/6452)
+
+  [TOURISM EFFECT ON ECONOMIC
+GROWTH IN INDONESIA](https://mpra.ub.uni-muenchen.de/65628/1/MPRA_paper_65628.pdf)
+

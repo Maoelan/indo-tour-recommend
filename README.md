@@ -56,7 +56,7 @@ Dataset : [Indonesia Tourism Destination](https://www.kaggle.com/datasets/aprabo
 - License : Data files © Original Authors (A_PRABOWO)
 - Date Updated : 21 July 2021
 
-### Variabel-variabel pada CO2 Emission by Vehicles dataset adalah sebagai berikut:
+### Variabel-variabel pada Indonesia Tourism Destination dataset adalah sebagai berikut:
 *   Variabel pada package_tourism.csv
     *   Package : Paket destinasi wisata
     *   City : Kota pada paket destinasi wisata
